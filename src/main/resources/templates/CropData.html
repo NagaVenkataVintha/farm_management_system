@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="ISO-8859-1">
+<title>Farm Management System</title>
+</head>
+<body>
+<h3>LIST OF REGISTERED CROPS</h3>
+<a th:href="@{/crop/register}">Add Crop</a>
+<table border="1">
+
+ <thead>
+  <tr>
+   <th>CropId</th>
+   <th>CropName</th>
+   <th>Area</th>
+   <th>PlantingDate</th>
+   <th>ExpectedHarvestingDate</th>
+   <th>ActualHarvestingDate</th>
+   <th>Links</th>
+  </tr>
+ </thead>
+ 
+ <tbody>
+  <tr th:each="crop: ${crops}">
+   <td th:text="${crop.crId}"/>
+   <td th:text="${crop.crName}"/>
+   <td th:text="${crop.crArea}"/>
+   <td th:text="${#dates.format(crop.plantingDate, 'yyyy-MM-dd')}"/>
+   <td th:text="${#dates.format(crop.expectedHarvestingDate, 'yyyy-MM-dd')}"/>
+   <td th:text="${#dates.format(crop.actualHarvestingDate, 'yyyy-MM-dd')}"/>
+   <td>
+     <a th:href="@{/crop/edit-crop/{id}(id=${crop.crId})}">Edit</a>
+     <a th:href="@{/crop/delete-crop/{id}(id=${crop.crId})}">Delete</a>
+   </td>
+  </tr>
+ </tbody>
+  
+</table>
+</body>
+</html>
